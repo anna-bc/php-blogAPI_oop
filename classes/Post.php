@@ -44,24 +44,35 @@ class Post
         return $post;
     }
 
-    public function editPost(string $title, string $content, string $author)
-    {
-        $this->title = $title;
-        $this->content = $content;
-        $this->author = new Author($author);
+    public static function getAllPosts(DatabaseEngine $dbEngine) : array {
+        $fileContents = $dbEngine->retrieveAllFiles();
+        $posts = [];
 
-        $this->dbEngine->createFile(
-            'post_' . $this->id,
-            json_encode([
-                'id' => $this->id,
-                'title' => $this->title,
-                'content' => $this->content,
-                'author' => $this->author->getAuthorName(),
-            ])
-        );
+        foreach($fileContents as $content) {
+            $post = (new Post($dbEngine))->setId($content->id)->setTitle($content->title)->setContent($content->content)->setAuthor($content->author);
+            array_push($posts, $post);
+        }
+        return $posts;
     }
 
-    private function setId(int $id) : self {
+    // public function editPost(string $title, string $content, string $author)
+    // {
+    //     $this->title = $title;
+    //     $this->content = $content;
+    //     $this->author = new Author($author);
+
+    //     $this->dbEngine->createFile(
+    //         'post_' . $this->id,
+    //         json_encode([
+    //             'id' => $this->id,
+    //             'title' => $this->title,
+    //             'content' => $this->content,
+    //             'author' => $this->author->getAuthorName(),
+    //         ])
+    //     );
+    // }
+
+    public function setId(int $id) : self {
         $this->id = $id;
         return $this;
     }

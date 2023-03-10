@@ -27,12 +27,24 @@ class DatabaseEngine {
     public function retrieveFile(string $filename) : string {
                 //check if the file exists first
         if (!file_exists($this->docRoot . $filename)){
-            return 'File could not be found';
+            throw new Exception('File could not be found');
         }
 
         $file = fopen($this->docRoot . $filename, 'r');
         $contents = file_get_contents($this->docRoot . $filename);
         fclose($file);
+
+        return $contents;
+    }
+
+    public function retrieveAllFiles(): array {
+        $files = array_diff(scandir($this->docRoot), ['.','..', '.DS_Store']);
+        $contents = [];
+
+        foreach ($files as $file) {
+            $content = $this->retrieveFile($file);
+            array_push($contents, json_decode($content));
+        }
 
         return $contents;
     }

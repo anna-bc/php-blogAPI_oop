@@ -11,6 +11,5 @@ if (in_array('', [$id, $title, $content, $author])) {
     die('Invalid Input');
 }
 
-$post = Post::getPost(new DatabaseEngine(), $id);
-
-$post->editPost($title, $content, $author);
+$post = Post::getPost(new DatabaseEngine(), $id)->setTitle($title)->setContent($content)->setAuthor($author);
+$post->save();
