@@ -77,6 +77,11 @@ class Post
         return $this;
     }
 
+    public function getId(): int
+    {
+        return $this->id;
+    }
+
     public function setTitle(string $title): self
     {
         $this->title = $title;

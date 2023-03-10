@@ -1,10 +1,12 @@
 <?php
+
+use Controllers\GetAllPostsController;
+use Models\GetAllPostsModel;
+use Models\Request;
+
     include('../imports.php');
 
-    $posts = Post::getAllPosts(new DatabaseEngine);
+    $view = (new GetAllPostsController(new GetAllPostsModel()))->run();
 
-
-    foreach ($posts as $key => $post) {
-        echo '<p>' . $post->getTitle() . '</p> <p>' . $post->getContent() . '</p> <p>' . $post->getAuthor() . '</p>';
-    }
+    echo $view->toString();
 ?>
