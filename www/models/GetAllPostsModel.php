@@ -2,7 +2,7 @@
 
 namespace Models;
 
-class GetAllPostsModel
+class GetAllPostsModel extends Model
 {
 
     private bool $success = false;

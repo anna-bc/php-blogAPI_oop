@@ -1,16 +1,23 @@
 <?php 
 namespace Controllers;
 
+use Controllers\Controller;
 use Exception;
+use GetAllPostsView;
 use Models\GetAllPostsModel;
+use Models\Model;
 use Models\Request;
 use Post;
 
-class GetAllPostsController {
-    
-    public function __construct(private GetAllPostsModel $getAllPostsModel) {}
+class GetAllPostsController implements Controller {
 
-    public function run() {
+    /**
+     * @param GetAllPostsModel $getAllPostsModel
+     */
+    public function __construct(private Model $getAllPostsModel) {}
+
+
+    public function run(Request $request) : GetAllPostsView {
         try {
             $allPosts = Post::getAllPosts(new \DatabaseEngine());
 
@@ -22,7 +29,7 @@ class GetAllPostsController {
             $this->getAllPostsModel->setMessage('Error: ' . $e->getMessage());
         }
 
-        $view = new \GetAllPostsView();
+        $view = new GetAllPostsView();
         $view->generate($this->getAllPostsModel);
         return $view;
     }

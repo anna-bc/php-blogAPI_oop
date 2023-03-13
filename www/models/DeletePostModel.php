@@ -1,7 +1,7 @@
 <?php
 namespace Models;
 
-class DeletePostModel {
+class DeletePostModel extends Model {
     private bool $success = false;
     private string $message = '';
     private int $deletedPostId = 0;
