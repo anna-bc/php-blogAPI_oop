@@ -1,4 +1,7 @@
 <?php 
+use Models\EditPostModel;
+use Models\Request;
+
 include('../imports.php');
 
 $id = $_POST['id'] ?? '';
@@ -11,5 +14,6 @@ if (in_array('', [$id, $title, $content, $author])) {
     die('Invalid Input');
 }
 
-$post = Post::getPost(new DatabaseEngine(), $id)->setTitle($title)->setContent($content)->setAuthor($author);
-$post->save();
+$view = (new EditPostController(new EditPostModel()))->run(new Request($_POST, $_GET));
+
+echo $view->toString();

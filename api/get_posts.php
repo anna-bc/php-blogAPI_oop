@@ -9,4 +9,3 @@ use Models\Request;
     $view = (new GetAllPostsController(new GetAllPostsModel()))->run();
 
     echo $view->toString();
-?>
