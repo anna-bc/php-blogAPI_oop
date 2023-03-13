@@ -13,3 +13,6 @@ include('www/views/CreatePostView.php');
 include('www/controllers/GetAllPostsController.php');
 include('www/models/GetAllPostsModel.php');
 include('www/views/GetAllPostsView.php');
+include('www/controllers/EditPostController.php');
+include('www/models/EditPostModel.php');
+include('www/views/EditPostView.php');
