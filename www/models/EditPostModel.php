@@ -4,7 +4,7 @@ namespace Models;
 
 use Post;
 
-class EditPostModel
+class EditPostModel extends Model
 {
     private bool $success = false;
     private string $message = '';

@@ -1,13 +1,18 @@
 <?php
 
 use Models\GetAllPostsModel;
+use Models\Model;
+use Views\View;
 
-class GetAllPostsView
+class GetAllPostsView implements View
 {
     private array $output = [];
 
-    public function generate(GetAllPostsModel $getAllPostsModel)
+    public function generate(Model $getAllPostsModel) : void
     {
+        /**
+         * @var GetAllPostsModel $getAllPostsModel
+         */
         $this->output = [
             'status' => $getAllPostsModel->getSuccess() ? 'Success' : 'Error',
             'message' => $getAllPostsModel->getMessage(),

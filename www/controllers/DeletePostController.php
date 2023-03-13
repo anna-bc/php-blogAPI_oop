@@ -2,17 +2,21 @@
 
 namespace Controllers;
 
+use Controllers\Controller;
 use Exception;
 use Models\DeletePostModel;
+use Models\Model;
 use Models\Request;
 use Views\DeletePostView;
 
-class DeletePostController
+class DeletePostController implements Controller
 {
-
-    public function __construct(
-        private DeletePostModel $deletePostModel
-    ) {
+    private DeletePostModel $deletePostModel;
+    public function __construct(Model $deletePostModel) {
+        /**
+         * @var DeletePostModel $deletePostModel
+         */
+        $this->deletePostModel =  $deletePostModel;
     }
 
     public function run(Request $request): DeletePostView
@@ -27,7 +31,7 @@ class DeletePostController
                 (new \Post(new \DatabaseEngine()))->setId($id)->delete();
 
                 $this->deletePostModel->setSuccess(true);
-                $this->deletePostModel->setMessage('Success');
+                $this->deletePostModel->setMessage('Deleteing file was successfull!');
                 $this->deletePostModel->setDeletedPostId($id);
             } catch (Exception $e) {
                 $this->deletePostModel->setSuccess(false);

@@ -4,11 +4,15 @@ namespace Controllers;
 
 use Exception;
 use Models\CreatePostModel;
+use Models\Model;
 use Models\Request;
 use Views\CreatePostView;
 
-class CreatePostController {
-    public function __construct(private CreatePostModel $createPostModel) {}
+class CreatePostController implements Controller {
+    /**
+     * @param CreatePostModel $createPostModel
+     */
+    public function __construct(private Model $createPostModel) {}
 
     public function run(Request $request) : CreatePostView {
         $title = $request->getFromPost('title', '');
