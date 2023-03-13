@@ -1,16 +1,11 @@
 <?php
 
+use Controllers\CreatePostController;
+use Models\CreatePostModel;
+use Models\Request;
+
 include('../imports.php');
 
-$title = $_POST['title'] ?? '';
-$content = $_POST['content'] ?? '';
-$author = $_POST['author'] ?? '';
+$view = (new CreatePostController(new CreatePostModel()))->run(new Request($_POST, $_GET));
 
-
-if (in_array('', [$title, $content, $author])) {
-    die('Invalid Input');
-}
-
-$post = (new Post(new DatabaseEngine()))->setTitle($title)->setContent($content)->setAuthor($author);
-
-$post->save();
+echo $view->toString();

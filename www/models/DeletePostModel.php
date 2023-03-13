@@ -29,6 +29,7 @@ class DeletePostModel {
         $this->deletedPostId = $id;
         return $this;
     }
+    
     public function getDeletedPostId(): int
     {
         return $this->deletedPostId;
